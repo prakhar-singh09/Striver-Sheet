@@ -12,31 +12,25 @@ Input: nums = [3,2,1]
 Output: [1,2,3]
 
 CODE 
-*/
-class Solution {
+*/class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int n = nums.size();
-        int ind = -1;
-        for(int i=n-2;i>=0;i--){
-             if(nums[i]<nums[i+1])
-             {
-                  ind = i;
-                  break;
-             }
+    	int n = nums.size(), k, l;
+    	for (k = n - 2; k >= 0; k--) {
+            if (nums[k] < nums[k + 1]) {
+                break;
+            }
         }
-        if(ind == -1){
-          reverse(nums.begin(),nums.end());
-        }
-        else{
-        for(int i= nums.size()-1;i>=0;i--){
-          if(nums[i]>nums[ind]){
-            swap(nums[i],nums[ind]);
-            break;
-          }
-        }
-          reverse(nums.begin()+ind+1,nums.end());
-        
+    	if (k < 0) {
+    	    reverse(nums.begin(), nums.end());
+    	} else {
+    	    for (l = n - 1; l > k; l--) {
+                if (nums[l] > nums[k]) {
+                    break;
+                }
+            } 
+    	    swap(nums[k], nums[l]);
+    	    reverse(nums.begin() + k + 1, nums.end());
         }
     }
 }; 
